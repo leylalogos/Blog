@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Author;
+use Artisan;
 
 class AuthorSeeder extends Seeder
 {
@@ -15,11 +16,12 @@ class AuthorSeeder extends Seeder
      */
     public function run()
     {
+        Artisan::call('passport:install');
         if (!Author::count()) {
             $authors = [
-                ['name' => 'sam'],
-                ['name' => 'ali'],
-                ['name' => 'leyla'],
+                ['username' => 'sam', 'password' => bcrypt('123')],
+                ['username' => 'ali', 'password' => bcrypt('123')],
+                ['username' => 'leyla', 'password' => bcrypt('123')],
             ];
             foreach ($authors as $author) {
                 Author::create($author);

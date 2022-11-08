@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\LoginController;
 
 /*
  |--------------------------------------------------------------------------
@@ -19,4 +21,6 @@ use App\Http\Controllers\TagController;
 
 Route::post('category/{category}/articles', [ArticleController::class, 'create']);
 Route::post('category', [CategoryController::class, 'create']);
-Route::post('tag', [TagController::class, 'create']);
+Route::post('tag', [TagController::class, 'create'])->name('tag');
+Route::post('subscription', [SubscriptionController::class, 'create']);
+Route::post('login', [LoginController::class, 'login']);

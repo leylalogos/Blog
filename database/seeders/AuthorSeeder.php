@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Author;
+use Illuminate\Support\Facades\DB;
 use Artisan;
 
 class AuthorSeeder extends Seeder
@@ -27,5 +28,6 @@ class AuthorSeeder extends Seeder
                 Author::create($author);
             }
         }
+        DB::table('oauth_clients')->update(['provider' => null]);
     }
 }

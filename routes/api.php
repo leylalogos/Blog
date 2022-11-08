@@ -31,6 +31,8 @@ Route::post('tag', [TagController::class, 'create'])->name('tag');
 Route::get('tags', [TagController::class, 'index']);
 Route::get('category/{category}/articles/{article}/tags', [TagController::class, 'getArticleTags']);
 Route::put('category/{category}/articles/{article}/tags', [TagController::class, 'updateArticleTags']);
+Route::get('category/{category}/tags', [TagController::class, 'getCategoryTags']);
+Route::put('category/{category}/tags', [TagController::class, 'updateCategoryTags']);
 
 
 Route::post('subscription', [SubscriptionController::class, 'create']);

@@ -24,4 +24,9 @@ class TagController extends Controller
         $tags = $article->tags()->pluck('tag_id');
         return response()->json(['tags' => $tags], 200);
     }
+    public function updateArticleTags(Request $request, Category $category, Article $article)
+    {
+        $article->tags()->sync($request->tags);
+        return response()->json(['message' => 'your article tags has been updated'], 200);
+    }
 }

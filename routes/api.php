@@ -28,5 +28,7 @@ Route::delete('category/{category}/articles/{article}', [ArticleController::clas
 Route::get('articles', [ArticleController::class, 'index']);
 
 Route::post('tag', [TagController::class, 'create'])->name('tag');
+Route::get('tags', [TagController::class, 'index']);
+
 Route::post('subscription', [SubscriptionController::class, 'create']);
 Route::post('login', [LoginController::class, 'login']);

@@ -19,12 +19,14 @@ use App\Http\Controllers\LoginController;
  |
  */
 
+Route::post('category', [CategoryController::class, 'create']);
+Route::delete('category/{category}', [CategoryController::class, 'destroy']);
+
 Route::post('category/{category}/articles', [ArticleController::class, 'create']);
 Route::put('category/{category}/articles/{article}', [ArticleController::class, 'edit'])->middleware('auth');
 Route::delete('category/{category}/articles/{article}', [ArticleController::class, 'destroy']);
 Route::get('articles', [ArticleController::class, 'index']);
 
-Route::post('category', [CategoryController::class, 'create']);
 Route::post('tag', [TagController::class, 'create'])->name('tag');
 Route::post('subscription', [SubscriptionController::class, 'create']);
 Route::post('login', [LoginController::class, 'login']);

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     protected $fillable = ['title', 'content', 'author_id', 'category_id'];
     public function author()
     {

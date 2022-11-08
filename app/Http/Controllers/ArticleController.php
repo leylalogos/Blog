@@ -7,23 +7,43 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function create(Request $request,$category)
+    public function index()
+    {
+        return Article::all();
+    }
+    public function create(Request $request, $category)
     {
         Article::create(
             [
                 'title' => $request->title,
                 'content' => $request->content,
-                //TODO: Add auth for author_id
-                'author_id' => $request->author_id,
+                'author_id' => auth()->id(),
                 'category_id' => $category
             ]
         );
-        return response()->json(['f'=>"ggg"]);
+        return response()->json(['message' => "your article successfully addeds"], 201);
     }
-    public function edit()
+    public function edit(Request $request, $category, Article $article)
     {
+        if ($article->author_id == auth()->id()) {
+            $article->update(
+                [
+                    'title' => $request->title,
+                    'content' => $request->content
+                ]
+            );
+
+            return response()->json(['message' => "your article  edited"], 200);
+        }
+        return response()->json(['message' => "you can not update your article"], 403);
+
     }
-    public function delete()
+    public function destroy($category, Article $article)
     {
+        if ($article->author_id == auth()->id()) {
+            $article->delete();
+            return response()->json(['message' => "your article deleted"], 200);
+        }
+        return response()->json(['message' => "you can not delete your article"], 403);
     }
 }

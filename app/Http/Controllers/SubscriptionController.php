@@ -15,5 +15,7 @@ class SubscriptionController extends Controller
                 'email' => $request->email
             ]
         );
+        return response()->json(['message' => 'your subscription has been created'], 201);
+
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmail;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Models\Subscription;
+
 
 class ArticleController extends Controller
 {
@@ -21,6 +24,10 @@ class ArticleController extends Controller
                 'category_id' => $category
             ]
         );
+        foreach (Subscription::all() as $subscription) {
+            dispatch( new SendEmail($request->title, $subscription->email) );
+        }
+
         return response()->json(['message' => "your article successfully addeds"], 201);
     }
     public function edit(Request $request, $category, Article $article)

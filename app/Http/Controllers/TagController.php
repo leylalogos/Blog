@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Models\Article;
 
 class TagController extends Controller
 {
@@ -16,7 +18,10 @@ class TagController extends Controller
         Tag::create(['name' => $request->name]);
         return response()->json(['message' => 'your tag has been created'], 201);
     }
-    public function edit()
+
+    public function getArticleTags(Category $category, Article $article)
     {
+        $tags = $article->tags()->pluck('tag_id');
+        return response()->json(['tags' => $tags], 200);
     }
 }
